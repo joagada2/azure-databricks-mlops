@@ -1,0 +1,43 @@
+name: Databricks-Infra-Deploy
+
+
+# Manual trigger with parameters
+on:
+  workflow_dispatch:
+    inputs:
+      # This resource group for the Databricks workspace and KeyVault
+      RESOURCE_GROUP:
+        description: 'Resource Group Name'
+        required: true
+        default: 'Databricks-MyProject'
+
+      # The Azure region to which to deploy your resources
+      LOCATION:
+        description: 'Azure Region'
+        required: true
+        default: 'EastUS2'
+
+      # This is the name of your Azure Databricks resource
+      WORKSPACE_NAME:
+        description: 'Databricks workspace name'
+        required: true
+        default: 'Databricks-MyProject'
+
+      # This is a KeyVault for holding the Service Principal to make Databricks API calls and to hold Databricks KeyVault backed Secrets
+      KEY_VAULT_NAME:
+        description: 'KeyVault name'
+        required: true
+        default: 'KeyVault-MyProject'
+
+      # This is a KeyVault for holding the Service Principal to make Databricks API calls and to hold Databricks KeyVault backed Secrets
+      SUBSCRIPTION_ID:
+        description: 'Azure Subscription Id'
+        required: true
+        default: '6324f4e0-2908-4bfc-b3d1-2824f25a0f8b'
+
+      # Inialize the system
+      # Note: We only want to run the KeyVault ARM template once.  If you keep re-running, then you will OVERWRITE your values
+      MODE:
+        description: 'Deployment Mode (Databricks or Initialize-KeyVault)'
+        required: true
+        default: 'Databricks'
